@@ -29,7 +29,7 @@ Install dependencies
 ```
 Install nltk package
 ```
-$ (venv) python
+(venv) python
 >>> import nltk
 >>> nltk.download('punkt')
 ```
@@ -38,7 +38,7 @@ $ (venv) python
 This will dump data.pth file. And then run
 the following command to test it in the console.
 ```
-$ (venv) python train.py
+(venv) python train.py
 ```
 Run
 ```
