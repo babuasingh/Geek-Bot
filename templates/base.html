@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="chatbox">
+            <div class="chatbox__support">
+                <div class="chatbox__header">
+                    <div class="chatbox__image--header">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h4 style="font-size: xxx-large;" class="chatbox__heading--header">Geek bot</h4>
+                        <p style="" class="chatbox__description--header">Hii , how can I help?
+                        </p>
+                    </div>
+                </div>
+                <div class="chatbox__messages">
+                    <div></div>
+                </div>
+                <div class="chatbox__footer">
+                    <input type="text" placeholder="Write a message...">
+                    <button class="chatbox__send--footer send__button">Send</button>
+                </div>
+                <button onclick="downloadCSV()" style="margin-top: 10px;" id="download-link">Download CSV transcript for
+                    Admin</button>
+            </div>
+            <div class="chatbox__button">
+                <button
+                    style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP8TGTSa684GEzcTSQjOPsDYKO6caK1tTF1ZxGe1Krqw&s'); background-size: cover; background-position: center; height: 45px; width: 45px;"></button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root | tojson }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+<script>
+    function downloadCSV() {
+        fetch($SCRIPT_ROOT + "/download_csv")
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'chat_transcript.csv';
+
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error downloading CSV:', error));
+    }
+
+    function sendFeedback(feedback) {
+        let id, clr;
+        if (feedback == 'Good') {
+            id = "green"
+            clr = "green"
+        }
+        if (feedback == 'Average') {
+            id = "blue"
+            clr = "blue"
+        }
+        if (feedback == 'Poor') {
+            id = "red"
+            clr = "red"
+        }
+        document.getElementById(id).style.backgroundColor = clr
+    }
+
+</script>
+
+</html>
