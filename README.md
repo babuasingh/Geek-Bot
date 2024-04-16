@@ -19,19 +19,20 @@ I have Used technologies like
 Clone repo and create a virtual environment
 ```
 git clone 'https://github.com/babuasingh/Geek-Bot.git'
-cd chatbot-deployment
-python -m venv venv
-. venv\Scripts\activate
+cd Geek-Bot
+python -m venv venv(for windows)   |   python3 -m venv venv(for macOS)
+. venv\Scripts\activate(for windows)  | . venv/bin/activate(for macOS)
 ```
 Install dependencies
 ```
-(venv) pip install Flask torch torchvision nltk
+(venv) pip install Flask torch torchvision nltk flask_cors
 ```
 Install nltk package
 ```
 (venv) python
 >>> import nltk
 >>> nltk.download('punkt')
+>>> quit()
 ```
 
 
